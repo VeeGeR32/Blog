@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = "mongodb+srv://veeger:OsFqmFXvCMOxFjbI@db.5qlht.mongodb.net/?retryWrites=true&w=majority&appName=DB";
 
 if (!MONGODB_URI) {
   console.error('MONGODB_URI is not defined. Please check your .env file.');

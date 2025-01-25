@@ -13,7 +13,7 @@ const ShareButton = ({ content, blogId }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="">
       <button
         onClick={handleShare}
         className="px-2 py-2 bg-slate-900 text-white rounded hover:bg-slate-700"

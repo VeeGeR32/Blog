@@ -23,12 +23,12 @@ const EditorPreview = ({ content, onContentChange }) => {
         </button>
       </div>
 
-      <div className="rounded-lg p-4 bg-[#2f2f2f] shadow-sm">
+      <div className="rounded-lg p-8 bg-[#ffffff] shadow-sm">
         {isRaw ? (
           <textarea
             value={content}
             onChange={handleChange}
-            className="w-full h-96 p-2 font-mono resize-none focus:outline-none bg-[#2f2f2f] text-white"
+            className="w-full h-96 p-2 font-mono resize-none focus:outline-none bg-[#ffffff] text-black"
           />
         ) : (
           <div className="prose max-w-none">

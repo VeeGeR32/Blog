@@ -16,7 +16,7 @@ const ShareButton = ({ content, blogId }) => {
     <div className="mt-4">
       <button
         onClick={handleShare}
-        className="px-2 py-2 bg-white text-black rounded hover:bg-slate-200"
+        className="px-2 py-2 bg-slate-900 text-white rounded hover:bg-slate-700"
       >
         <FaExternalLinkAlt />
       </button>

@@ -18,29 +18,42 @@ const BlogView = () => {
 
   const exportPDF = () => {
     const input = document.getElementById("blog-content");
-    html2canvas(input).then((canvas) => {
+    html2canvas(input, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      const imgProps = pdf.getImageProperties(imgData);
+      const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pdfWidth - 20; // 10mm margin on each side
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 10;
+
+      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
+
       pdf.save(`${id}.pdf`);
     });
   };
 
   return (
     <div className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto bg-[#2f2f2f] p-6 rounded-lg shadow-sm">
+      <div className="max-w-4xl mx-auto bg-[#ffffff] p-8 rounded-lg shadow-sm">
         <div className="flex justify-end mb-4 space-x-2">
           <button
             onClick={exportPDF}
-            className="px-2 py-2 bg-white text-black rounded hover:bg-slate-200"
+            className="p-2 bg-slate-900 text-white rounded hover:bg-slate-700"
           >
             <FaDownload />
           </button>
         </div>
-        <div id="blog-content" className="prose max-w-none bg-[#2f2f2f] text-white">
+        <div id="blog-content" className="prose max-w-none bg-[#ffffff] text-black">
           <ReactMarkdown
             children={content}
             components={{

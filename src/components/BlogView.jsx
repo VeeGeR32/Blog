@@ -54,6 +54,7 @@ const BlogView = () => {
           </button>
         </div>
         <div id="blog-content" className="prose max-w-none bg-[#ffffff] text-black">
+          <h1 className="text-center text-4xl font-bold mb-8">Titre du Blog</h1>
           <ReactMarkdown
             children={content}
             components={{

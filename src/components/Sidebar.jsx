@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight, FaEdit } from "react-icons/fa";
+import { cleanMarkdownTitle } from "../utils/markdownUtils";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -75,7 +76,7 @@ const Sidebar = () => {
             {blogs.map((blog) => (
               <li key={blog.id} className="mb-2 flex justify-between items-center relative">
                 <Link to={`/blog/${blog.id}`} className="text-white hover:underline flex-1">
-                  {blog.content.split('\n')[0] || blog.id}
+                  {cleanMarkdownTitle(blog.content.split('\n')[0]) || blog.id}
                 </Link>
                 <button
                   onClick={(event) => handleContextMenu(event, blog.id)}
